@@ -1,0 +1,35 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Tasks</h1>
+<div class="container">
+
+  <%= form_with(model: @task, class: "row d-flex g-3") do |form| %>
+    <div class="col-auto">
+      <%= form.label "Tarefa" %>
+      <%= form.text_field :name %>
+    </div>
+
+    <div class="col-auto">
+      <%= form.label "Completo" %>
+      <%= form.check_box :completed %>
+    </div>
+
+    <div class="col-auto">
+      <%= form.button :submit, class: "btn btn-primary mb-3" %>
+    </div>
+
+  <% end %>
+</div>
+
+<%= turbo_stream_from 'tasks' %>
+
+
+<h3> TODO </h3>
+<%= turbo_frame_tag "todo_list" do %>
+  <%= render @tasks %>
+<% end %>
+
+<h3> DONE </h3>
+<%= turbo_frame_tag "done_list" do %>
+  <%= render @done_tasks %>
+<% end %>
